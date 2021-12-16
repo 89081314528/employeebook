@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.julia.employeebook.entities.Employee;
+import ru.julia.employeebook.dto.EmployeeDto;
 import ru.julia.employeebook.service.EmployeeService;
 
 @RestController
@@ -27,7 +27,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/find")
-    public Employee find(@RequestParam String firstName, @RequestParam String lastName) {
+    public EmployeeDto find(@RequestParam String firstName, @RequestParam String lastName) {
         return employeeService.find(firstName, lastName);
     }
 }

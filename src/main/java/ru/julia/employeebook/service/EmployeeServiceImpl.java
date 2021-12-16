@@ -2,7 +2,8 @@ package ru.julia.employeebook.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.julia.employeebook.dto.EmployeeNotFound;
+import ru.julia.employeebook.dto.EmployeeDto;
+import ru.julia.employeebook.Exception.EmployeeNotFound;
 import ru.julia.employeebook.entities.Employee;
 import ru.julia.employeebook.repositories.EmployeeRepository;
 
@@ -32,12 +33,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee find(String firstName, String lastName) {
+    public EmployeeDto find(String firstName, String lastName) { // правильно???
         List<Employee> employeeList = employeeRepository.getByFirstNameAndLastName(firstName, lastName);
         if (employeeList.isEmpty()) {
             throw new EmployeeNotFound();
         }
         Employee employee = employeeList.get(0);
-        return employee;
+        EmployeeDto employeeDto = new EmployeeDto(employee.getFirstName(), employee.getLastName(),
+                employee.getSalary(), employee.getDepartmentId());
+        return employeeDto;
     }
 }
