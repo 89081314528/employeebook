@@ -14,8 +14,8 @@ public class Employee {
     @Column(name = "emp_id")
     @Id
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @GeneratedValue(generator = "uuid2")
-    private UUID employeeId = UUID.randomUUID();
+    @GeneratedValue(generator = "uuid2") // генерирует рандомный id
+    private UUID employeeId;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -39,9 +39,13 @@ public class Employee {
 
     public boolean equals(Object obj) { // так?
         Employee emp = (Employee) obj;
-        return employeeId == emp.employeeId;
+        if (employeeId == null) {
+            return false;
+        }
+        return employeeId == emp.employeeId;//!!!!!!!!!!!equals
     }
 
-//    public int hashCode() { // переопределить
-//    }
+    public int hashCode() { // переопределить
+        return 31;
+    }
 }
