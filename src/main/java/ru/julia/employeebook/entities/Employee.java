@@ -37,12 +37,12 @@ public class Employee {
         return firstName + " " + lastName + " " + salary + " " + departmentId;
     }
 
-    public boolean equals(Object obj) { // так?
-        Employee emp = (Employee) obj;
-        if (employeeId == null) {
-            return false;
-        }
-        return employeeId == emp.employeeId;//!!!!!!!!!!!equals
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return employeeId.equals(employee.employeeId);
     }
 
     public int hashCode() { // переопределить

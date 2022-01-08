@@ -33,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto find(String firstName, String lastName) { // правильно???
+    public EmployeeDto find(String firstName, String lastName) {
         List<Employee> employeeList = employeeRepository.getByFirstNameAndLastName(firstName, lastName);
         if (employeeList.isEmpty()) {
             throw new EmployeeNotFound();
